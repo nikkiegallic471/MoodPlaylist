@@ -7,9 +7,9 @@
 
 **Describe your mood. Get a real playlist.**
 
-MoodPlaylist is a web app that transforms your feelings into curated playlists. Type how you're feeling -- whether it's "post-breakup melancholy," "Sunday morning coffee vibes," or "need energy for a workout" -- and get a playlist of 8-10 real, well-known songs that match your mood.
+MoodPlaylist transforms your feelings into curated playlists. Type how you're feeling -- whether it's "post-breakup melancholy," "Sunday morning coffee vibes," or "need energy for a workout" -- and get a playlist of 8-10 real songs with album art and YouTube links.
 
-Powered by the Groq API (Llama 3.3 70B), it generates thoughtful playlists with creative titles and even links each track to YouTube so you can start listening immediately.
+Powered by Groq API (Llama 3.3 70B). [Live on Vercel](https://moodplaylist.vercel.app).
 
 ---
 
@@ -17,9 +17,10 @@ Powered by the Groq API (Llama 3.3 70B), it generates thoughtful playlists with 
 
 - **Mood-to-Playlist AI** -- Describe any feeling, emotion, or scenario and get a tailored playlist
 - **Real Songs Only** -- No generic recommendations; actual tracks by real artists
-- **YouTube Integration** -- Each track includes a direct link to search YouTube for instant playback
+- **Album Art** -- Fetches real artwork from iTunes for each track
+- **YouTube Integration** -- Each track includes a direct link to YouTube
 - **Creative Playlist Titles** -- AI generates catchy, thematic names for every playlist
-- **Cover Art Descriptions** -- Vivid descriptions of what the album artwork would look like
+- **Cover Art Descriptions** -- Vivid descriptions of what the playlist artwork would look like
 - **Dark OLED Design** -- Spotify-inspired dark theme optimized for OLED screens
 - **Fully Responsive** -- Works seamlessly on desktop and mobile
 - **Accessible** -- ARIA live regions, reduced motion support, semantic HTML
@@ -88,6 +89,13 @@ npm start
 
 The app will be available at **http://localhost:3000**.
 
+### Deploy to Vercel
+
+1. Push to GitHub
+2. Import the repo on [vercel.com](https://vercel.com)
+3. Add `GROQ_API_KEY` in Settings → Environment Variables
+4. Deploy
+
 ---
 
 ## How It Works
@@ -114,7 +122,8 @@ Frontend renders playlist card with tracks + YouTube links
 1. **Input** -- The user types a natural-language description of their mood, feeling, or situation into the textarea (max 500 characters)
 2. **Generation** -- The server sends the mood to Groq's Llama 3.3 70B model with a carefully crafted prompt requesting 8-10 real songs
 3. **Response** -- The AI returns a JSON object containing a playlist title, cover art description, and an array of tracks (song + artist)
-4. **Display** -- The frontend renders the playlist as a styled card with numbered tracks, each linked to a YouTube search for instant playback
+4. **Album Art** -- Server fetches real artwork from iTunes for each track
+5. **Display** -- The frontend renders the playlist as a styled card with album art thumbnails and YouTube links
 
 ---
 
@@ -145,14 +154,14 @@ POST /api/generate
   "title": "Windows Down, Stars Out",
   "coverArt": "A warm sunset highway stretching into the horizon, dashboard lit in amber, a mixtape half-visible in the cupholder",
   "tracks": [
-    { "song": "Fast Car", "artist": "Tracy Chapman" },
-    { "song": "On The Road Again", "artist": "Willie Nelson" },
-    { "song": "Take It Easy", "artist": "Eagles" },
-    { "song": "Born to Run", "artist": "Bruce Springsteen" },
-    { "song": "Radar Love", "artist": "Golden Earring" },
-    { "song": "Life is a Highway", "artist": "Tom Cochrane" },
-    { "song": "Shut Up and Drive", "artist": "Rihanna" },
-    { "song": "Drive", "artist": "Incubus" }
+    { "song": "Fast Car", "artist": "Tracy Chapman", "albumArt": "https://..." },
+    { "song": "On The Road Again", "artist": "Willie Nelson", "albumArt": "https://..." },
+    { "song": "Take It Easy", "artist": "Eagles", "albumArt": "https://..." },
+    { "song": "Born to Run", "artist": "Bruce Springsteen", "albumArt": "https://..." },
+    { "song": "Radar Love", "artist": "Golden Earring", "albumArt": "https://..." },
+    { "song": "Life is a Highway", "artist": "Tom Cochrane", "albumArt": "https://..." },
+    { "song": "Shut Up and Drive", "artist": "Rihanna", "albumArt": "https://..." },
+    { "song": "Drive", "artist": "Incubus", "albumArt": "https://..." }
   ]
 }
 ```
@@ -173,9 +182,10 @@ POST /api/generate
 MoodPlaylist/
 ├── .env.example          # Template for environment variables
 ├── .gitignore            # Git ignore rules (node_modules, .env)
-├── .mcp.json             # MCP server configuration (fetch, git)
+├── .mcp.json             # MCP server config (Context7)
 ├── package.json          # Dependencies and scripts
 ├── server.js             # Express server + Groq API integration
+├── vercel.json           # Vercel deployment config
 └── public/
     ├── index.html        # Single-page HTML structure
     ├── style.css         # Design system and styles
