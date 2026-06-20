@@ -309,6 +309,28 @@ button[type="submit"]:disabled {
   color: var(--color-on-primary);
 }
 
+/* Album Art */
+.track-art {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-surface-elevated);
+}
+
+.track-art-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface-elevated);
+  color: var(--color-foreground-subtle);
+  flex-shrink: 0;
+}
+
 .track-info {
   flex: 1;
   min-width: 0;

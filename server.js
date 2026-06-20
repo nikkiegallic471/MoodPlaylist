@@ -7,6 +7,23 @@ app.use(express.json());
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
+// Fetch album art from iTunes Search API (free, no key needed)
+async function fetchAlbumArt(song, artist) {
+  try {
+    const query = encodeURIComponent(`${song} ${artist}`);
+    const url = `https://itunes.apple.com/search?term=${query}&media=music&limit=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.results && data.results.length > 0) {
+      // Replace 100x100 with 300x300 for better quality
+      return data.results[0].artworkUrl100?.replace('100x100', '300x300') || null;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 app.post('/api/generate', async (req, res) => {
   const { mood } = req.body;
   if (!mood) return res.status(400).json({ error: 'mood is required' });
@@ -48,6 +65,17 @@ Pick real songs by real artists that genuinely match the mood described.`
 
     const text = data.choices[0].message.content;
     const parsed = JSON.parse(text);
+
+    // Fetch album art for all tracks in parallel
+    const artPromises = parsed.tracks.map(t => fetchAlbumArt(t.song, t.artist));
+    const artUrls = await Promise.all(artPromises);
+
+    // Add albumArt URL to each track
+    parsed.tracks = parsed.tracks.map((t, i) => ({
+      ...t,
+      albumArt: artUrls[i]
+    }));
+
     res.json(parsed);
   } catch (err) {
     console.error(err);

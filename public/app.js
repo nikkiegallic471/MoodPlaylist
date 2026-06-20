@@ -43,8 +43,16 @@ form.addEventListener('submit', async (e) => {
     trackList.innerHTML = data.tracks.map(t => {
       const query = encodeURIComponent(`${t.song} ${t.artist}`);
       const youtubeUrl = `https://www.youtube.com/results?search_query=${query}`;
+      const albumArtHtml = t.albumArt
+        ? `<img class="track-art" src="${t.albumArt}" alt="${escapeHtml(t.song)} album art" loading="lazy" />`
+        : `<div class="track-art-placeholder">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+          </div>`;
       return `
         <li>
+          ${albumArtHtml}
           <div class="track-info">
             <div class="track-song">${escapeHtml(t.song)}</div>
             <div class="track-artist">${escapeHtml(t.artist)}</div>
