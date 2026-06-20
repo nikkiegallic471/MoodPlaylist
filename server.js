@@ -85,3 +85,4 @@ Pick real songs by real artists that genuinely match the mood described.`
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+module.exports = app;
