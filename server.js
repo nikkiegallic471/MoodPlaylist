@@ -1,8 +1,9 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 
 const app = express();
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
@@ -83,6 +84,10 @@ Pick real songs by real artists that genuinely match the mood described.`
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+// Only listen when running locally (not on Vercel)
+if (process.env.VERCEL !== '1') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+}
+
 module.exports = app;
