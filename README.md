@@ -59,7 +59,7 @@ Powered by Groq API (Llama 3.3 70B). [Live on Vercel](https://moodplaylist.verce
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/MoodPlaylist.git
+git clone https://github.com/shirleyshyun-lgtm/MoodPlaylist.git
 cd MoodPlaylist
 
 # Install dependencies
